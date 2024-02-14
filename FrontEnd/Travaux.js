@@ -13,22 +13,21 @@ async function getWorks() {
 async function createWorks() {
   const gallery = document.querySelector(".galerie");
   const works = await getWorks();
-  console.log(gallery);
   works.forEach((work) => {
     const figure = document.createElement("figure");
     const img = document.createElement("img");
     const figcaption = document.createElement("figcaption");
     img.src = work.imageUrl;
     figcaption.textContent = work.title;
-    figure.classList.add("galleryStyle");
+    figure.classList.add("galeriesStyle");
     figure.appendChild(img);
     figure.appendChild(figcaption);
-    galerie.appendChild(figure)
+    gallery.appendChild(figure)
   });
 }
 //---------------------
 createWorks();
-/*
+
 async function getCategorys() {
   const response = await fetch("http://localhost:5678/api/categories");
   return await response.json();
@@ -46,6 +45,7 @@ async function displayCategorysButtons() {
     // chercher l'id dans la categories
   });
 }
+getCategorys();
 displayCategorysButtons();
 
 /*sur tous = 0  ne pas activé */
