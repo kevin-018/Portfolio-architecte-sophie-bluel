@@ -208,14 +208,14 @@ li:hover {
   margin-bottom: 1em;
 }
 /* Rajout*/
-#portfolio .category {
+ .filters  {
   display: flex;
   flex-direction: row;
   margin: 4% 1%;
   justify-content: center;
 }
 
-#portfolio .category button  {
+ .filters button  {
   border-width: 1px;
   padding: 9px 15px;
   border-radius: 60px;
@@ -224,22 +224,18 @@ li:hover {
   cursor: pointer;
   background-color: white;
 }
-#portfolio .category :hover {
+ .filters :hover {
   background-color: #1d6154;
   color: white;
 }
 
-#formulary {
+.filters button {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 #formulary h2 {
   padding-bottom: 2%;
-}
-
-#formulary .formulary__form {
-  margin: 0 0 3% 0;
 }
 #search-mail {
   height: 50px;

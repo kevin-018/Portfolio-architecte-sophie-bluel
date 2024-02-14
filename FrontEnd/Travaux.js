@@ -1,5 +1,5 @@
 // variables
-
+const gallery = document.querySelector(".galerie");
 const filters = document.querySelector(".filters");
 
 // le tableau de la galleries
@@ -11,7 +11,6 @@ async function getWorks() {
 // affichez le works
 
 async function createWorks() {
-  const gallery = document.querySelector(".galerie");
   const works = await getWorks();
   works.forEach((work) => {
     const figure = document.createElement("figure");
@@ -43,10 +42,12 @@ async function displayCategorysButtons() {
     // cherche le name dans categories
     btn.id = category.id;
     // chercher l'id dans la categories
+    filters.appendChild(btn);
+    console.log(filters)
   });
 }
-getCategorys();
 displayCategorysButtons();
+
 
 /*sur tous = 0  ne pas activé */
 
