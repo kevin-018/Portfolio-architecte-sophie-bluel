@@ -1,1 +1,0 @@
-var imagejavascript = document.createElement("img");

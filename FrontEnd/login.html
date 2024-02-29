@@ -1,57 +1,57 @@
 <!DOCTYPE html>
 <html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Sophie Bluel - Architecte d'intérieur</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-    <meta name="description" content="">
-    <link rel="stylesheet" href="./assets/style.css">
-    <script src="login.js"></script>
-</head>
-<body>
-<header>
-    <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-    <nav>
-		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
-</header>
-</body>
-<main>
-    <section id ="formulary">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="./assets/login.css" />
+    <script type="module" defer src="./assets/scripts/login.js" ></script>
+  </head>
+  <body>
+  <header>
+      <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+      <nav>
+        <ul>
+          <li><a href="./index.html">projets</a></li> 
+          <li>contact</li>
+          <li><a href="./login.html">login</a></li>
+          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="introduction">
+        <figure>
+
+        </figure>
+
+      </section>
+
+      <section id="login">
         <h2>Log In</h2>
-        <h3>E-mail</h3>
-        <form class="formulary__form">
-            <div class="formulary_input">
-            <input type="text" name="search-mail" id="search-mail" placeholder=""></div>
+
+        <form method="#" method="post">
+
+          
+          <label for="email">E-mail</label>
+          <input type="email" name="email" id="email" required>
+          <label for="pass" class="log">  Mot de passe</label>
+          <input type="password" name="pass" id="password" required>
+          <input type="submit" value="Envoyer" id="form-log">
+          <a href="#" class="mdp-oublie">Mot de passe oublié</a>
         </form>
-        <h3>Mot de passe</h3>
-        <form class="formulary__form">
-            <div class="formulary_input">
-                <input type="text" name="search-password" id="search-password" placeholder="">
-            </div>
-        </form>
-
-
-    </section>
-        
-
-</main>
-
-
-
-
-
-
-
-
-
+      </section>
+    </main>
+    <footer>
+      <nav>
+        <ul class="relative">
+          <li class="absolute">Mention Légales</li>
+        </ul>
+      </nav>
+    </footer>
+  </body>
 </html>

@@ -1,0 +1,348 @@
+.mode-edition{
+    text-align: center;
+     padding-top: 15px;
+     padding-bottom: 15px;
+     margin-left: -13%;
+     margin-right: -12%;
+     margin-top: -15px;
+     background-color: black;
+     color:  white;
+     display: none;
+   }
+   
+   .mode-edition svg {
+     width: 20px;
+     height: 16px;
+     margin-bottom: -3px;
+   }
+   
+   .mode-edition button {
+     margin-top: 10px;
+     background-color: transparent;
+     color: white;
+     border: none;
+   }
+   
+   .flex-align {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+   }
+   
+   .flex-align button {
+     background-color: transparent;
+     color: black;
+     border: none;
+     margin-bottom: 2%;
+     display: none;
+   }
+   
+   .align-p {
+     margin-left: 30px;
+     margin-bottom: 2%;
+   }
+   
+   .align-p svg {
+     height: 18px;
+     margin-bottom: -1%;
+   }
+   
+   .overlay {
+     position: fixed;
+     top:0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0 , 0, 0.5);
+     display: none;
+   }
+   
+   .modal {
+     position: fixed;
+     top: 25%;
+     left: 37%;
+     width: 50%;
+     height: 60%;
+     min-height: 35px;
+     max-height: 500px;
+     background-color: white;
+     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+     border-radius: 10px;
+     padding-left: 80px;
+     padding-right: 80px;
+     padding-top: 40px;
+     display: none;
+   }
+   
+   .modal-d {
+     position: fixed;
+     top: 25%;
+     left: 37%;
+     width: 50%;
+     height: 60%;
+     max-height: 500px;
+     background-color: white;
+     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+     border-radius: 10px;
+     padding-left: 80px;
+     padding-right: 80px;
+     padding-top: 40px;
+     display: none;
+   }
+   
+   
+   .error-message{
+     color:red;
+     font-weight: bold;
+     text-align: center;
+   }
+   
+   .modal-header {
+     height: 50px;
+   }
+   
+   .modal-title {
+     color: black;
+     font-size: 20px;
+     font-weight: 500;
+     padding-top: 20px;
+     padding-bottom: 10px;
+     font-family: 'Work Sans' ;
+   }
+   
+   .modal-body {
+     display: flex;
+     width: 350px;
+     row-gap:20px;
+     column-gap: 7px;
+     flex-wrap: wrap;
+     justify-content: flex-start;
+     align-items: center;
+   }
+   
+   .js-modal-body {
+     max-height: 325px;
+     width:400px;
+     overflow-y: auto;
+   }
+   
+   
+   .divModal {
+     position: relative;
+     display: inline-flex;
+     max-width: 100%;
+     max-height: 100%; 
+     width: 16%; /* Ajoutez cette ligne */
+     overflow: hidden; /* Ajoutez cette ligne */
+   }
+   
+   .divModal img{
+     flex-basis: 20%;
+     max-width: 100%;
+     max-height: 100%; 
+     object-fit: cover;
+   }
+   
+   .divModal .fa-trash {
+     position: absolute;
+     right:5px;
+     top: 5px;
+     color: white;
+     background-color: black;
+     padding:3px;
+     font-size: 10px;
+     cursor: pointer;
+     border: none;
+   }
+   
+   
+   #selectedImage {
+     width: 100px;
+   }
+   
+   .modal--open {
+     display: block;
+     width: 350px;
+   }
+   
+   .modal--open-d {
+     display: block;
+     width: 350px;
+   }
+   
+   .modal-return {
+     position: absolute;
+     top: 15px;
+     left: 8px;
+     cursor: pointer;
+   }
+   
+   .modal-return button {
+     background-color: transparent;
+     color: black;
+     border: none;
+   }
+   
+   .fa-arrow-left {
+     width: 30px;
+     height: 30px;
+   }
+   
+   .modal-close {
+     position: absolute;
+     top: 15px;
+     right: 8px;
+     cursor: pointer;
+     transition: 0.3s all ease-in-out;
+   }
+   
+   .modal-close button {
+     background-color: transparent;
+     color: black;
+     border: none;
+   }
+   
+   .modal-close svg {
+     width: 15px;
+     height: 15px;
+   }
+   
+   .modal-close:hover {
+     transform: rotate(360deg)
+   }
+   
+   .modal-footer {
+     display: flex;
+     justify-content: center;
+     /* Espacement entre la ligne séparatrice et le bouton */
+     text-align: center; /* Centrer le bouton */
+   }
+   
+   
+   
+   .modal-footer-button {
+     position: absolute;
+     bottom: 25px;
+     right: 150px;
+     font-size: 14px;
+     font-family: 'Work Sans';
+     padding-top: 10px;
+     padding-bottom: 10px;
+     padding-left: 35px;
+     padding-right: 35px;
+     border: none;
+     background-color: #1D6154;
+     color: white;
+     cursor: pointer;
+     border-radius: 20px;
+   }
+   
+   input[type="submit"].modal-footer-button-d {
+     position: absolute;
+     bottom: -5px;
+     right: 160px;
+     font-size: 14px;
+     font-family: 'Work Sans';
+     font-weight: 500;
+     padding: 10px 35px;
+     border: none;
+     background-color: grey;
+     color: white;
+     cursor: pointer;
+     border-radius: 20px;
+     margin-top: 20px;
+   }
+   
+   
+   .formPhoto{
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     background-color: rgb(227, 246, 252);
+     height: 150px
+   }
+   
+   .formPhoto p {
+     margin-top: 10px;
+     font-size: 10px;
+   }
+   .fa-image{
+   color: grey;
+   transform: scale(4.5);
+   margin-bottom: 33px;
+   margin-top: 15px;
+   }
+   
+   .buttonAddPhoto{
+     z-index: 1; 
+     border: none;
+     color: #306685;
+     padding-top: 9px;
+     padding-bottom: 9px;
+     padding-left: 35px;
+     padding-right: 35px;
+     border-radius: 25px;
+     background-color: rgb(199, 199, 199);
+   }
+   
+   .js-photo{
+     display: none;
+   }
+   
+   .formTitle{
+   display: flex;
+   flex-direction: column;
+   margin-top: 30px;
+   }
+   
+   .formTitle label{
+     font-weight: bold;
+     margin-bottom: 7px;
+   }
+   
+   .js-title{
+   border: none;
+   box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+   padding: 10px;
+   
+   }
+   
+   .formCategories{
+     display: flex;
+     flex-direction: column;
+     margin-top: 15px;
+     margin-bottom: 20px;
+   }
+   
+   .formCategories label {
+     font-weight: bold;
+     margin-bottom: 7px;
+   }
+   
+   .js-category{
+     border: none;
+     box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+     padding: 10px;
+   }
+   
+   .container-hr {
+     position: absolute;
+     bottom: 85px; 
+     left: 65px; 
+     right: 65px; 
+   }
+   
+   .modal-hr {
+     margin: 0;
+   }
+   
+   .modal-d.has-image .p-photo,
+   .modal-d.has-image .buttonAddPhoto,
+   .modal-d.has-image .fa-image {
+     display: none;
+   }
+   
+   .extra-space {
+     margin-bottom: 60px;
+   }

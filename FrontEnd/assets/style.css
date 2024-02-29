@@ -208,14 +208,22 @@ li:hover {
   margin-bottom: 1em;
 }
 /* Rajout*/
- .filters  {
+.container {
   display: flex;
   flex-direction: row;
   margin: 4% 1%;
   justify-content: center;
 }
 
- .filters button  {
+.container :hover {
+  background-color: #1d6154;
+  color: white;
+}
+
+.filter-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-width: 1px;
   padding: 9px 15px;
   border-radius: 60px;
@@ -223,16 +231,6 @@ li:hover {
   margin-right: 10px;
   cursor: pointer;
   background-color: white;
-}
- .filters :hover {
-  background-color: #1d6154;
-  color: white;
-}
-
-.filters button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 #formulary h2 {
   padding-bottom: 2%;
@@ -245,8 +243,10 @@ li:hover {
   height: 50px;
   width: 380px;
 }
-
-.galerie {
+.edition-mode {
+  display: none;
+}
+.gallery {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -254,7 +254,7 @@ li:hover {
   grid-row-gap: 20px;
 }
 
-.galeriesStyle img {
+.gallery img {
   width: 100%;
 }
 #contact {
