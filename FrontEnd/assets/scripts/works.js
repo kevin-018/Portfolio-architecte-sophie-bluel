@@ -1,7 +1,7 @@
 // Recupération et stockage des travaux
 let works = [];
 
-const token = localStorage.getItem('token');
+const token = localStorage.getItem("token");
 
 // Récuperer les données via l'API
 async function fetchData() {
@@ -18,9 +18,8 @@ async function fetchData() {
 
     // le tableau des travaux
     createWorks(works);
-
   } catch (error) {
-    console.error('Fetch error:', error);
+    console.error("Fetch error:", error);
   }
 }
 
@@ -126,7 +125,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             // recharge Travaux
             return fetchData();
-
           } else {
             console.error("echec");
 
@@ -156,7 +154,6 @@ async function getCategories() {
 
     const data = await response.json();
     createCategories(data);
-
   } catch (error) {
     console.error("Fetch error:", error);
   }
@@ -186,7 +183,7 @@ function createCategories(categories) {
     buttonCategories.innerText = buttonC.name;
     buttonCategories.setAttribute("data-category-id", buttonC.id);
     categoriesGallery.appendChild(buttonCategories);
-  };
+  }
 
   const divD = document.createElement("div");
 
@@ -201,7 +198,6 @@ function createCategories(categories) {
   const boutonsF = document.querySelectorAll(".filter-button");
 
   boutonsF.forEach((bouton) => {
-
     bouton.addEventListener("click", () => {
       const categorieFilterId = parseInt(
         bouton.getAttribute("data-category-id"),
@@ -236,7 +232,7 @@ function createWorks(filteredWorks) {
   const gallery = document.querySelector(".gallery");
   const modal = document.querySelector(".modal");
 
-  gallery.innerHTML = '';
+  gallery.innerHTML = "";
 
   const modalBody = document.querySelector(".modal-body");
 
@@ -263,7 +259,7 @@ function createWorks(filteredWorks) {
     const modal = document.querySelector(".modal");
     const trashIcon = document.createElement("button");
     trashIcon.type = "button";
-    trashIcon.classList.add("fa-solide", "fa-trash");
+    trashIcon.classList.add();
 
     imgGallery.src = travail.imageUrl;
     imgModal.src = travail.imageUrl;
@@ -278,7 +274,7 @@ function createWorks(filteredWorks) {
     divModal.appendChild(trashIcon);
     modalBody.appendChild(divModal);
 
-    trashIcon.addEventListener("click", event => {
+    trashIcon.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
 
@@ -286,10 +282,9 @@ function createWorks(filteredWorks) {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
-      })
-      .then(() => {
+      }).then(() => {
         window.alert("Photo supprimée");
         return fetchData();
       });
@@ -318,19 +313,19 @@ if (token) {
   flexAlign.classList.remove("extra-space");
 }
 
-const input = document.querrySelector("#inputFile")
+const input = document.querrySelector("#inputFile");
 if (input != null) {
   input.addEventListener("change", (event) => {
     // fichier selectionnée
     const file = event.target.files[0];
-    const fileUrl = URL.createObjectURL(file)
+    const fileUrl = URL.createObjectURL(file);
 
     // images
-    const imgElement = document.createElement("img")
-    imgElement.src = fileUrl
-    imgElement.id = "selectedImage"
+    const imgElement = document.createElement("img");
+    imgElement.src = fileUrl;
+    imgElement.id = "selectedImage";
 
     const container = document.querySelector(".formP");
     container.appendChild(imgElement);
-  })
+  });
 }
