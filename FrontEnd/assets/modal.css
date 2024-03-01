@@ -205,8 +205,8 @@
 .modal-footer {
   display: flex;
   justify-content: center;
-  /* Espacement entre la ligne séparatrice et le bouton */
-  text-align: center; /* Centrer le bouton */
+  
+  text-align: center; 
 }
 
 .modal-footer-button {
