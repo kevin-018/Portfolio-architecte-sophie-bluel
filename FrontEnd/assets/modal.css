@@ -129,8 +129,8 @@
   display: inline-flex;
   max-width: 100%;
   max-height: 100%;
-  width: 16%; /* Ajoutez cette ligne */
-  overflow: hidden; /* Ajoutez cette ligne */
+  width: 16%;
+  overflow: hidden;
 }
 
 .divModal img {
@@ -177,11 +177,6 @@
   background-color: transparent;
   color: black;
   border: none;
-}
-
-.fa-arrow-left {
-  width: 30px;
-  height: 30px;
 }
 
 .modal-close {
@@ -252,10 +247,9 @@ input[type="submit"].modal-footer-button-d {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #E8F1F6;
+  background-color: #e8f1f6;
   height: 150px;
 }
-
 
 .fa-image {
   color: grey;
