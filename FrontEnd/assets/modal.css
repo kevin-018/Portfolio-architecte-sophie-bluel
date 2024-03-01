@@ -247,19 +247,16 @@ input[type="submit"].modal-footer-button-d {
   margin-top: 20px;
 }
 
-.formPhoto {
+.formP {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(227, 246, 252);
+  background-color: #E8F1F6;
   height: 150px;
 }
 
-.formPhoto p {
-  margin-top: 10px;
-  font-size: 10px;
-}
+
 .fa-image {
   color: grey;
   transform: scale(4.5);
@@ -268,7 +265,7 @@ input[type="submit"].modal-footer-button-d {
 }
 
 .buttonAddPhoto {
-  z-index: 1;
+  justify-content: center;
   border: none;
   color: #306685;
   padding-top: 9px;
