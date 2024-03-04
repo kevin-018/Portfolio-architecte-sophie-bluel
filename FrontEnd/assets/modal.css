@@ -140,7 +140,7 @@
   object-fit: cover;
 }
 
-.divModal .fa-trash {
+/**.divModal .fa-trash {
   position: absolute;
   right: 5px;
   top: 5px;
@@ -151,7 +151,7 @@
   cursor: pointer;
   border: none;
 }
-
+**/
 #selectedImage {
   width: 100px;
 }

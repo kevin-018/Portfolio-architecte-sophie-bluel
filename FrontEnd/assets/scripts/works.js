@@ -253,43 +253,37 @@ function createWorks(filteredWorks) {
   filteredWorks.forEach((travail) => {
     const figureGallery = document.createElement("figure");
     const imgGallery = document.createElement("img");
-    const imgModal = document.createElement("img");
-    const divModal = document.createElement("div");
-    divModal.classList.add("divModal");
-    const modal = document.querySelector(".modal");
-    const trashIcon = document.createElement("button");
-    trashIcon.type = "button";
-    trashIcon.classList.add();
 
     imgGallery.src = travail.imageUrl;
-    imgModal.src = travail.imageUrl;
     const figCaptionGallery = document.createElement("figcaption");
     figCaptionGallery.innerText = travail.title;
-
+    
     gallery.appendChild(figureGallery);
     figureGallery.appendChild(imgGallery);
     figureGallery.appendChild(figCaptionGallery);
-
-    divModal.appendChild(imgModal);
-    divModal.appendChild(trashIcon);
-    modalBody.appendChild(divModal);
-
-    trashIcon.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      fetch(`http://localhost:5678/api/works/${travail.id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }).then(() => {
-        window.alert("Photo supprimée");
-        return fetchData();
-      });
-    });
   });
+
+
+
+  //const trash = document.createElement("i")
+  //const imgModal = document.createElement("img");
+  //imgModal.src = travail.imageUrl;
+  //img.src = travail.image
+  //trash.id = travail.id
+  //trash.classList.add("fa-solid","fa-trash-can")
+  
+
+      //fetch(`http://localhost:5678/api/works/${travail.id}`, {
+        //method: "DELETE",
+        //headers: {
+        //  "Content-Type": "application/json",
+        //  Authorization: `Bearer ${token}`,
+        //},
+      //}).then(() => {
+      //  window.alert("Photo supprimée");
+      //  return fetchData();
+    //  });
+    //});
 }
 
 const logoutButton = document.getElementById("loginButton");
@@ -311,21 +305,4 @@ if (token) {
   flexAlign.classList.add("extra-space");
 } else {
   flexAlign.classList.remove("extra-space");
-}
-
-const input = document.querrySelector("#inputFile");
-if (input != null) {
-  input.addEventListener("change", (event) => {
-    // fichier selectionnée
-    const file = event.target.files[0];
-    const fileUrl = URL.createObjectURL(file);
-
-    // images
-    const imgElement = document.createElement("img");
-    imgElement.src = fileUrl;
-    imgElement.id = "selectedImage";
-
-    const container = document.querySelector(".formP");
-    container.appendChild(imgElement);
-  });
 }
