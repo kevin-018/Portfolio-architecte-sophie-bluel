@@ -28,8 +28,3 @@ function returnModal() {
 }
 
 const token = localStorage.getItem("token");
-
-// <i class="fa fa-trash" aria-hidden="true"></i> a rajouté pour les images ou en svg
-// 2eme icones croix a reparer (ne se ferme pas)
-// rajouter le retour a la page precedente au modal return
-// faire apparaitre l'image quand selectionner 
