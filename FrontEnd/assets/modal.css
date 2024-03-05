@@ -139,19 +139,21 @@
   max-height: 100%;
   object-fit: cover;
 }
-
-/**.divModal .fa-trash {
+ span {
+  background-color: black;
+  height: 10px;
   position: absolute;
   right: 5px;
   top: 5px;
-  color: white;
-  background-color: black;
   padding: 3px;
   font-size: 10px;
   cursor: pointer;
   border: none;
 }
-**/
+.fa-solid.fa-trash-can {
+  color: white;
+}
+
 #selectedImage {
   width: 100px;
 }
@@ -205,8 +207,8 @@
 .modal-footer {
   display: flex;
   justify-content: center;
-  
-  text-align: center; 
+
+  text-align: center;
 }
 
 .modal-footer-button {

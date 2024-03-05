@@ -246,44 +246,58 @@ function createWorks(filteredWorks) {
       child.remove();
     }
   });
-
   const modalForm = document.createElement("div");
   modalForm.classList.add("modalForm");
 
   filteredWorks.forEach((travail) => {
-    const figureGallery = document.createElement("figure");
+    // const priority
     const imgGallery = document.createElement("img");
-
-    imgGallery.src = travail.imageUrl;
     const figCaptionGallery = document.createElement("figcaption");
-    figCaptionGallery.innerText = travail.title;
+    const figureGallery = document.createElement("figure");
     
+    const trashIcon = document.createElement("i");
+    const divModal = document.createElement("div");
+    const imgModal = document.createElement("img");
+    const span = document.createElement("span");
+    // appendChild
     gallery.appendChild(figureGallery);
-    figureGallery.appendChild(imgGallery);
     figureGallery.appendChild(figCaptionGallery);
+    figureGallery.appendChild(imgGallery);
+
+    span.appendChild(trashIcon);
+    divModal.appendChild(span);
+    modalBody.appendChild(divModal);
+    divModal.appendChild(imgModal);
+    
+    figCaptionGallery.innerText = travail.title;
+    imgGallery.src = travail.imageUrl;
+    
+    imgModal.src = travail.imageUrl;
+    trashIcon.id = travail.id;
+    
+    
+    
+    trashIcon.classList.add("fa-solid", "fa-trash-can");
+    divModal.classList.add("divModal");
+    
+    console.log(travail);
+    
+    trashIcon.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      fetch(`http://localhost:5678/api/works/${travail.id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(() => {
+        window.alert("Photo supprimée");
+        return fetchData();
+      });
+    });
   });
-
-
-
-  //const trash = document.createElement("i")
-  //const imgModal = document.createElement("img");
-  //imgModal.src = travail.imageUrl;
-  //img.src = travail.image
-  //trash.id = travail.id
-  //trash.classList.add("fa-solid","fa-trash-can")
-  
-
-      //fetch(`http://localhost:5678/api/works/${travail.id}`, {
-        //method: "DELETE",
-        //headers: {
-        //  "Content-Type": "application/json",
-        //  Authorization: `Bearer ${token}`,
-        //},
-      //}).then(() => {
-      //  window.alert("Photo supprimée");
-      //  return fetchData();
-    //  });
-    //});
 }
 
 const logoutButton = document.getElementById("loginButton");
