@@ -254,7 +254,6 @@ function createWorks(filteredWorks) {
     const imgGallery = document.createElement("img");
     const figCaptionGallery = document.createElement("figcaption");
     const figureGallery = document.createElement("figure");
-    
     const trashIcon = document.createElement("i");
     const divModal = document.createElement("div");
     const imgModal = document.createElement("img");
@@ -263,7 +262,6 @@ function createWorks(filteredWorks) {
     gallery.appendChild(figureGallery);
     figureGallery.appendChild(figCaptionGallery);
     figureGallery.appendChild(imgGallery);
-
     span.appendChild(trashIcon);
     divModal.appendChild(span);
     modalBody.appendChild(divModal);
@@ -272,16 +270,16 @@ function createWorks(filteredWorks) {
     figCaptionGallery.innerText = travail.title;
     imgGallery.src = travail.imageUrl;
     
-    imgModal.src = travail.imageUrl;
-    trashIcon.id = travail.id;
-    
-    
-    
-    trashIcon.classList.add("fa-solid", "fa-trash-can");
-    divModal.classList.add("divModal");
-    
     console.log(travail);
     
+
+
+    trashIcon.classList.add("fa-solid", "fa-trash-can");
+    divModal.classList.add("divModal");
+
+    imgModal.src = travail.imageUrl;
+    trashIcon.id = travail.id;
+
     trashIcon.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
