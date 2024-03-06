@@ -25,7 +25,6 @@ async function fetchData() {
 
 //execute la fonction fetchdata apres le DOM
 document.addEventListener("DOMContentLoaded", async () => {
-  console.log("LOADED?");
   await fetchData();
   getCategories();
 
@@ -115,7 +114,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       })
         .then((response) => {
           if (response.ok) {
-            console.log("Photo envoyé");
+            
 
             removePreviewImage();
             resetModalI();
@@ -126,7 +125,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             // recharge Travaux
             return fetchData();
           } else {
-            console.error("echec");
+            
 
             window.alert("Veuillez renseignez les champs.");
           }
@@ -218,7 +217,7 @@ function createCategories(categories) {
 // filtre sur les travaux
 
 function filterByCategorie(categorieId) {
-  console.log("filtre categorie Id:", categorieId);
+  
   const travauxF = works.filter((travail) => {
     return categorieId === 0 || travail.categoryId === categorieId;
   });
@@ -270,7 +269,7 @@ function createWorks(filteredWorks) {
     figCaptionGallery.innerText = travail.title;
     imgGallery.src = travail.imageUrl;
     
-    console.log(travail);
+    
     
 
 
