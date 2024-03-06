@@ -1,7 +1,5 @@
- <i class="fa fa-trash" aria-hidden="true"></i> a rajouté pour les images ou en svg
- 2eme icones croix a reparer (ne se ferme pas)
+2eme icones croix a reparer (ne se ferme pas)
  rajouter le retour a la page precedente au modal return
  faire apparaitre l'image quand selectionner 
- reste a reparer la seconde icone fermeture qui se ferme pas quand la 1ere est bien fermer -->
-
+ 
 token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4
