@@ -24,10 +24,10 @@ function openModalD() {
 function returnModal() {
   document.querySelector(".modal-d").classList.remove("modal--open-d");
   document.querySelector(".modal").classList.remove("modal--open");
-  document.querySelector("modal").classList.add("modal--open");
+  document.querySelector(".modal").classList.add("modal--open");
   document.querySelector(".overlay").style.display = "block";
 
-  document.querySelector("overlay").addEventListener("click", function (event) {
+  document.querySelector(".overlay").addEventListener("click", function (event) {
     if (event.target === document.querySelector(".overlay")) {
       returnModal();
     }

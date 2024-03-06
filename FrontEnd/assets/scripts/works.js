@@ -29,62 +29,75 @@ document.addEventListener("DOMContentLoaded", async () => {
   getCategories();
 
   const form = document.getElementById("myForm");
-  const photoInput = document.getElementById("inputFile");
-  const titleInput = document.getElementById("inputTitle");
-  const icon = document.querySelector(".fa-image");
   const selectCategories = document.getElementById("selectCategories");
   const submitButton = document.getElementById("submitButton");
   const erreurText = document.createElement("p");
 
   erreurText.classList.add("error-message");
 
+  const previewImg = document.querySelector(".formP");
+  const photoInput = document.querySelector(".formP input");
+  const labelFile = document.querySelector(".formP label");
+  const inconFile = document.querySelector(".formP .fa-image");
+
+  //ecoute
+  photoInput.addEventListener("change", () => {
+    const file = photoInput.files[0];
+    console.log(file);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        previewImg.src = e.target.result
+        previewImg.style.display = "flex"
+        labelFile.style.display = "none"
+        inconFile.style.display = "none"
+      }
+      reader.readAsDataURL(file);
+    }
+  })
+  //function updateButtonColor() {
+  //const photoInput = document.getElementById("inputFile");
+
+  //if (photoInput.files[0] && titleInput.value && selectCategories.value) {
+  //  submitButton.style.backgroundColor = "#1D6154";
+  //} else {
+  //submitButton.style.backgroundColor = "";
+  //}
+  //}
+
+  //titleInput.addEventListener("input", updateButtonColor);
+  //selectCategories.addEventListener("change", updateButtonColor);
+
+  //function removePreviewImage() {
+  //if (selectedImage) {
+  //   selectedImage.parentNode.removeChild(selectedImage);
+  //}
+  //}
+
+  //function updatePreview() {
+  //const icon = document.querrySelector("fa-image");
+  //const buttonAdd = document.querySelector(".buttonAddPhoto");
+  //const pPhoto = document.querrySelector(".p-photo");
+
+  //if (photoInput.files[0]) {
+  //buttonAdd.style.display = "none";
+  //pPhoto.style.display = "none";
+  //icon.style.display = "none";
+  //}
+  //}
+  // ajout d'images (preview)
+  //function addInput() {
+  //const buttonAdd = document.querrySelector(".buttonAddPhoto");
+  //const pPhoto = document.querrySelector(".p-photo");
+
+  //buttonAdd.style.display = "block";
+  //pPhoto.style.display = "block";
+  //icon.style.display = "block";
+  //}
+
   // ecouteur evenement
-  photoInput.addEventListener("input", () => {
-    updateButtonColor();
-    updatePreview();
-  });
-
-  titleInput.addEventListener("input", updateButtonColor);
-  selectCategories.addEventListener("change", updateButtonColor);
-
-  function removePreviewImage() {
-    if (selectedImage) {
-      selectedImage.parentNode.removeChild(selectedImage);
-    }
-  }
-
-  function updatePreview() {
-    const buttonAdd = document.querySelector("buttonAddPhoto");
-    const pPhoto = document.querrySelector(".p-photo");
-
-    if (photoInput.files[0]) {
-      buttonAdd.style.display = "none";
-      pPhoto.style.display = "none";
-      icon.style.display = "none";
-    }
-  }
-
-  function addInput() {
-    const buttonAdd = document.querrySelector(".buttonAddPhoto");
-    const pPhoto = document.querrySelector(".p-photo");
-
-    buttonAdd.style.display = "block";
-    pPhoto.style.display = "block";
-    icon.style.display = "block";
-  }
-
-  function updateButtonColor() {
-    const photoInput = document.getElementById("inputFile");
-    const buttonAdd = document.querySelector(".buttonAddPhoto");
-    const pPhoto = document.querrySelector(".p-photo");
-    const icon = document.querrySelector(".fa-image");
-
-    if (photoInput.files[0] && titleInput.value && selectCategories.value) {
-      submitButton.style.backgroundColor = "#1D6154";
-    } else {
-      submitButton.style.backgroundColor = "";
-    }
-  }
+  
 
   function resetModalI() {
     titleInput.value = "";
@@ -92,51 +105,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     photoInput.value = "";
     submitButton.style.backgroundColor = "";
   }
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    if (
-      document.querrySelector(".modal-d").classList.contains("modal--open-d")
-    ) {
-      const endPoint = "http://localhost:5678/api/works";
-      const formData = new FormData();
-
-      formData.append("image", photoInput.files[0]);
-      formData.append("title", titleInput.value);
-      formData.append("category", selectCategories.value);
-
-      fetch(endPoint, {
-        method: "POST",
-        body: formData,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => {
-          if (response.ok) {
-            
-
-            removePreviewImage();
-            resetModalI();
-            addInput();
-
-            window.alert("Photo ajouté");
-
-            // recharge Travaux
-            return fetchData();
-          } else {
-            
-
-            window.alert("Veuillez renseignez les champs.");
-          }
-        })
-
-        .catch((error) => {
-          console.error("Erreur pendant la requete", error);
-        });
+  
     }
-  });
-});
+  );
+
 //--------------------- catégories
 
 //tableau catégories
@@ -217,7 +189,6 @@ function createCategories(categories) {
 // filtre sur les travaux
 
 function filterByCategorie(categorieId) {
-  
   const travauxF = works.filter((travail) => {
     return categorieId === 0 || travail.categoryId === categorieId;
   });
@@ -265,13 +236,9 @@ function createWorks(filteredWorks) {
     divModal.appendChild(span);
     modalBody.appendChild(divModal);
     divModal.appendChild(imgModal);
-    
+
     figCaptionGallery.innerText = travail.title;
     imgGallery.src = travail.imageUrl;
-    
-    
-    
-
 
     trashIcon.classList.add("fa-solid", "fa-trash-can");
     divModal.classList.add("divModal");
