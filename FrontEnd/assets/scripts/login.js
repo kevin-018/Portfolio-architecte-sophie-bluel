@@ -23,9 +23,8 @@ async function userLog() {
     console.log(logToken);
     console.log(logToken.token);
 
-    const valueLogToken = JSON.stringify(logToken.token);
-    console.log(valueLogToken);
-    window.localStorage.setItem("token", valueLogToken);
+    
+    window.localStorage.setItem("token", logToken.token);
     window.localStorage.getItem("token");
 
     const loginPage = document.querySelector(".log");
