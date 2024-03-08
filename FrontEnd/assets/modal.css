@@ -255,7 +255,7 @@ input[type="submit"].modal-footer-button-d {
   margin-top: 20px;
 }
 
-.formP {
+.containerFile {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -271,7 +271,7 @@ input[type="submit"].modal-footer-button-d {
   margin-top: 15px;
 }
 
-.formP label {
+.containerFile label {
   justify-content: center;
   border: none;
   color: #306685;
@@ -282,10 +282,10 @@ input[type="submit"].modal-footer-button-d {
   border-radius: 25px;
   background-color: rgb(199, 199, 199);
 }
-.formP input {
+.containerFile input {
   display: none;
 }
-.formP img {
+.containerFile img {
   display: none;
   max-width: 100%;
   max-height: 100%;

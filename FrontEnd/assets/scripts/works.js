@@ -27,88 +27,33 @@ async function fetchData() {
 document.addEventListener("DOMContentLoaded", async () => {
   await fetchData();
   getCategories();
-
-  const form = document.getElementById("myForm");
-  const selectCategories = document.getElementById("selectCategories");
-  const submitButton = document.getElementById("submitButton");
   const erreurText = document.createElement("p");
-
   erreurText.classList.add("error-message");
+});
+//preview image
+const previewImg = document.querySelector(".containerFile img")
+const inputFile = document.querySelector(".containerFile input")
+const labelFile = document.querySelector(".containerFile label")
+const iconFile  = document.querySelector(".containerFile .fa-image")
+const pFile = document.querySelector(".containerFile p")
 
-  const previewImg = document.querySelector(".formP");
-  const photoInput = document.querySelector(".formP input");
-  const labelFile = document.querySelector(".formP label");
-  const inconFile = document.querySelector(".formP .fa-image");
+// ecoute changement input 
 
-  //ecoute
-  photoInput.addEventListener("change", () => {
-    const file = photoInput.files[0];
-    console.log(file);
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        previewImg.src = e.target.result
-        previewImg.style.display = "flex"
-        labelFile.style.display = "none"
-        inconFile.style.display = "none"
-      }
-      reader.readAsDataURL(file);
+inputFile.addEventListener("change",()=>{
+  const file = inputFile.files[0]
+  console.log(file);
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e){
+      previewImg.src = e.target.result
+      previewImg.style.display ="flex"
+      labelFile.style.display ="none"
+      iconFile.style.display ="none"
+      pFile.style.display ="none"
     }
-  })
-  //function updateButtonColor() {
-  //const photoInput = document.getElementById("inputFile");
-
-  //if (photoInput.files[0] && titleInput.value && selectCategories.value) {
-  //  submitButton.style.backgroundColor = "#1D6154";
-  //} else {
-  //submitButton.style.backgroundColor = "";
-  //}
-  //}
-
-  //titleInput.addEventListener("input", updateButtonColor);
-  //selectCategories.addEventListener("change", updateButtonColor);
-
-  //function removePreviewImage() {
-  //if (selectedImage) {
-  //   selectedImage.parentNode.removeChild(selectedImage);
-  //}
-  //}
-
-  //function updatePreview() {
-  //const icon = document.querrySelector("fa-image");
-  //const buttonAdd = document.querySelector(".buttonAddPhoto");
-  //const pPhoto = document.querrySelector(".p-photo");
-
-  //if (photoInput.files[0]) {
-  //buttonAdd.style.display = "none";
-  //pPhoto.style.display = "none";
-  //icon.style.display = "none";
-  //}
-  //}
-  // ajout d'images (preview)
-  //function addInput() {
-  //const buttonAdd = document.querrySelector(".buttonAddPhoto");
-  //const pPhoto = document.querrySelector(".p-photo");
-
-  //buttonAdd.style.display = "block";
-  //pPhoto.style.display = "block";
-  //icon.style.display = "block";
-  //}
-
-  // ecouteur evenement
-  
-
-  function resetModalI() {
-    titleInput.value = "";
-    selectCategories.value = "";
-    photoInput.value = "";
-    submitButton.style.backgroundColor = "";
+    reader.readAsDataURL(file);
   }
-  
-    }
-  );
-
+})
 //--------------------- catégories
 
 //tableau catégories
@@ -201,13 +146,9 @@ function filterByCategorie(categorieId) {
 function createWorks(filteredWorks) {
   const gallery = document.querySelector(".gallery");
   const modal = document.querySelector(".modal");
-
   gallery.innerHTML = "";
-
   const modalBody = document.querySelector(".modal-body");
-
   modalBody.innerHTML = "";
-
   Array.from(modal.children).forEach((child) => {
     if (
       !child.classList.contains("modal-close") &&
@@ -218,34 +159,31 @@ function createWorks(filteredWorks) {
   });
   const modalForm = document.createElement("div");
   modalForm.classList.add("modalForm");
-
   filteredWorks.forEach((travail) => {
     // const priority
     const imgGallery = document.createElement("img");
-    const figCaptionGallery = document.createElement("figcaption");
-    const figureGallery = document.createElement("figure");
     const trashIcon = document.createElement("i");
     const divModal = document.createElement("div");
     const imgModal = document.createElement("img");
+    const figureGallery = document.createElement("figure");
+    const figCaptionGallery = document.createElement("figcaption");
     const span = document.createElement("span");
     // appendChild
     gallery.appendChild(figureGallery);
-    figureGallery.appendChild(figCaptionGallery);
     figureGallery.appendChild(imgGallery);
-    span.appendChild(trashIcon);
     divModal.appendChild(span);
     modalBody.appendChild(divModal);
     divModal.appendChild(imgModal);
+    span.appendChild(trashIcon);
+    figureGallery.appendChild(figCaptionGallery);
 
     figCaptionGallery.innerText = travail.title;
     imgGallery.src = travail.imageUrl;
-
-    trashIcon.classList.add("fa-solid", "fa-trash-can");
     divModal.classList.add("divModal");
-
+    trashIcon.classList.add("fa-solid", "fa-trash-can");
     imgModal.src = travail.imageUrl;
     trashIcon.id = travail.id;
-
+    
     trashIcon.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
@@ -258,27 +196,24 @@ function createWorks(filteredWorks) {
         },
       }).then(() => {
         window.alert("Photo supprimée");
-        return fetchData();
+        return fetchData()
       });
     });
   });
 }
-
+//log 
 const logoutButton = document.getElementById("loginButton");
-
 if (token !== null) {
+  const login = document.querySelector("#loginButton");
   document.querySelector(".flex-align button").style.display = "block";
   document.querySelector(".mode-edition").style.display = "block";
-  const login = document.querySelector("#loginButton");
   login.innerText = "Logout";
   logoutButton.addEventListener("click", () => {
     localStorage.removeItem("token");
     window.location.reload();
   });
 }
-
 const flexAlign = document.querySelector(".flex-align");
-
 if (token) {
   flexAlign.classList.add("extra-space");
 } else {
