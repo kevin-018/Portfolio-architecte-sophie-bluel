@@ -9,6 +9,9 @@ async function userLog() {
     const passwordLog = document.getElementById("password");
     const password = passwordLog.value;
     console.log(password);
+    const errorLog = document.getElementById("error_log");
+    errorLog.innerText ="Email ou Mot de passe incorrecte !";
+    errorLog.style.color = "red";
 
     const iDLogin = { email: email, password: password };
     const chargeUtile = JSON.stringify(iDLogin);
@@ -23,7 +26,6 @@ async function userLog() {
     console.log(logToken);
     console.log(logToken.token);
 
-    
     window.localStorage.setItem("token", logToken.token);
     window.localStorage.getItem("token");
 
@@ -34,13 +36,19 @@ async function userLog() {
       loginPage.innerHTML = "";
       loginPage.innerHTML = "connecté";
     } else {
-      loginPage.innerHTML = "";
-      loginPage.innerHTML = "email ou mot de passe incorecte!";
+      // information error
+      const errorLog = document.querySelector("error_log")
+      console.log("error_log");
       passwordLog.innerHTML = "";
-      console.log("email ou mot de passe incorecte");
+      loginPage.innerHTML = "";
+      
+      
+      
+      
     }
   });
 }
+
 const valueToken = window.localStorage.getItem("token");
 console.log(valueToken);
 if (valueToken === null) {
@@ -49,4 +57,3 @@ if (valueToken === null) {
   window.location.href = "index.html";
   console.log("connecté");
 }
-

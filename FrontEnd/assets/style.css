@@ -234,6 +234,9 @@ li:hover {
   cursor: pointer;
   background-color: white;
 }
+.filter-button.active.active{
+  background-color: #1d6154;
+}
 #formulary h2 {
   padding-bottom: 2%;
 }

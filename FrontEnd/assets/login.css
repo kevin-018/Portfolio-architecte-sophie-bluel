@@ -231,7 +231,7 @@ input[type="submit"]{
 	font-weight:600;
 }
 
-.error-message{
+ span#error_log{
 	color:red;
 	font-weight: bold;
 	text-align: center;

@@ -30,30 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const erreurText = document.createElement("p");
   erreurText.classList.add("error-message");
 });
-//preview image
-const previewImg = document.querySelector(".containerFile img")
-const inputFile = document.querySelector(".containerFile input")
-const labelFile = document.querySelector(".containerFile label")
-const iconFile  = document.querySelector(".containerFile .fa-image")
-const pFile = document.querySelector(".containerFile p")
 
-// ecoute changement input 
-
-inputFile.addEventListener("change",()=>{
-  const file = inputFile.files[0]
-  console.log(file);
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function (e){
-      previewImg.src = e.target.result
-      previewImg.style.display ="flex"
-      labelFile.style.display ="none"
-      iconFile.style.display ="none"
-      pFile.style.display ="none"
-    }
-    reader.readAsDataURL(file);
-  }
-})
 //--------------------- catégories
 
 //tableau catégories
@@ -183,7 +160,7 @@ function createWorks(filteredWorks) {
     trashIcon.classList.add("fa-solid", "fa-trash-can");
     imgModal.src = travail.imageUrl;
     trashIcon.id = travail.id;
-    
+
     trashIcon.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
@@ -196,12 +173,12 @@ function createWorks(filteredWorks) {
         },
       }).then(() => {
         window.alert("Photo supprimée");
-        return fetchData()
+        return fetchData();
       });
     });
   });
 }
-//log 
+//log
 const logoutButton = document.getElementById("loginButton");
 if (token !== null) {
   const login = document.querySelector("#loginButton");
@@ -219,3 +196,57 @@ if (token) {
 } else {
   flexAlign.classList.remove("extra-space");
 }
+
+//preview image
+const previewImg = document.querySelector(".containerFile img");
+const inputFile = document.querySelector(".containerFile input");
+const labelFile = document.querySelector(".containerFile label");
+const iconFile = document.querySelector(".containerFile .fa-image");
+const pFile = document.querySelector(".containerFile p");
+
+// ecoute changement input
+
+inputFile.addEventListener("change", () => {
+  const file = inputFile.files[0];
+  console.log(file);
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      previewImg.src = e.target.result;
+      previewImg.style.display = "flex";
+      labelFile.style.display = "none";
+      iconFile.style.display = "none";
+      pFile.style.display = "none";
+    };
+    reader.readAsDataURL(file);
+    
+    // POST pour l'ajout
+    
+       {
+        const imageUrl = URL.createObjectURL(file);
+        console.log(file)
+        const title = document.getElementById('title-add-form').value;
+        const categoryId = document.getElementById('category-add-select').value;
+
+        let formData = new FormData();
+        formData.append("image", previewImg);
+        formData.append("title", title);
+        formData.append("category", categoryId);
+        fetch("http://localhost:5678/api/works", {
+          method: "POST",
+          body: formData,
+          headers: 
+          {
+            'Authorization': 'Bearer' +token,  
+          }
+        })
+        .then(function (response) {
+          console.log('Response:', response);
+          if (response.ok) {
+            addNewWork(title, imageUrl, categoryId);
+            
+          } 
+        })
+      }
+    }
+})
