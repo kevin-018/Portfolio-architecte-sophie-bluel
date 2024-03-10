@@ -222,27 +222,10 @@
   text-align: center;
 }
 
-.modal-footer-button {
+button#addWorkButton.validButton {
   position: absolute;
-  bottom: 25px;
-  right: 150px;
-  font-size: 14px;
-  font-family: "Work Sans";
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 35px;
-  padding-right: 35px;
-  border: none;
-  background-color: #1d6154;
-  color: white;
-  cursor: pointer;
-  border-radius: 20px;
-}
-
-input[type="submit"].modal-footer-button-d {
-  position: absolute;
-  bottom: -5px;
-  right: 160px;
+  bottom: 30px;
+  right: 200px;
   font-size: 14px;
   font-family: "Work Sans";
   font-weight: 500;
@@ -252,7 +235,6 @@ input[type="submit"].modal-footer-button-d {
   color: white;
   cursor: pointer;
   border-radius: 20px;
-  margin-top: 20px;
 }
 
 .containerFile {
@@ -292,40 +274,37 @@ input[type="submit"].modal-footer-button-d {
 }
 
 .formTitle {
-  display: flex;
-  flex-direction: column;
   margin-top: 30px;
 }
 
-.formTitle label {
+label.label_titre {
   font-weight: bold;
   margin-bottom: 7px;
 }
 
-.js-title {
-  border: none;
+input#titre.input_titre {
   box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+  border: none;
   padding: 10px;
+  width: 95%;
+  background-clip: text;
 }
 
-.formCategories {
-  display: flex;
-  flex-direction: column;
+select#selectCategories {
   margin-top: 15px;
-  margin-bottom: 20px;
-}
-
-.formCategories label {
-  font-weight: bold;
-  margin-bottom: 7px;
-}
-
-.js-category {
   border: none;
   box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
   padding: 10px;
+  width: 100%;
 }
 
+div.formCategories{
+  margin-top: 10px;
+}
+label#label_categorie.label_categorie {
+  font-weight: bold;
+  
+}
 .container-hr {
   position: absolute;
   bottom: 85px;

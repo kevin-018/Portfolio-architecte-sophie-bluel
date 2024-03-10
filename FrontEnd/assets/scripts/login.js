@@ -43,10 +43,10 @@ async function userLog() {
       loginPage.innerHTML = "";
       
       
+      // information error
       
-      
-    }
-  });
+      }
+    });
 }
 
 const valueToken = window.localStorage.getItem("token");

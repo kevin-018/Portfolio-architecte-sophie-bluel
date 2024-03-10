@@ -116,13 +116,13 @@
 				<p>jpg, png : 4mo max </p>
 			</div>
 			<div class="formTitle">
-				<label for="titre">Titre</label>
-				<input type="text" name="title" id="inputTitle" class="js-title">
+				<label for="titre" class="label_titre">Titre</label>
+				<input type="text" name="titre" id="titre" class="input_titre">
 			</div>
 
 			<div class="formCategories">
-						<label for="categorie">Catégorie</label>
-						<select name="categorie" class="js-category" id="selectCategories">
+						<label for="categorie" class="label_categorie" id="label_categorie">Catégorie</label>
+						<select name="categories" id="selectCategories">
 							<option></option>
 							<option value="1">Objets</option>
 							<option value="2">Appartements</option>
@@ -140,10 +140,13 @@
 				<div class="container-hr">
 					<hr class="modal-hr">
 				</div>
-
-				<input type="submit" value="valider"
-					class="modal-footer-button-d" id="submitButton">
-				</input>
+				<!-- Bouton de validation du projet -->
+				<div class="activateValidButton">
+					<button class="validButton" type="button"  id="addWorkButton">Valider </button>
+				</div>
+					
+					
+				
 		</form>
 	</div>
 	<div class="gallery">	</div>

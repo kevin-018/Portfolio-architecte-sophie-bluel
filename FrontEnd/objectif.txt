@@ -1,4 +1,2 @@
 faire apparaitre l'image quand selectionner 
 faire la fonction qui permet de supprimer une images ou la faire reapparaitre  
-
-token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4

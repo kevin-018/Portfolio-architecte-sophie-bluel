@@ -2,7 +2,6 @@
 let works = [];
 
 const token = localStorage.getItem("token");
-
 // Récuperer les données via l'API
 async function fetchData() {
   const worksUrl = "http://localhost:5678/api/works";
@@ -178,6 +177,12 @@ function createWorks(filteredWorks) {
     });
   });
 }
+
+function getAuthorization(){
+  const token = JSON.parse(localStorage.getItem('auth')).token;
+  return 'Bearer' + token;
+}
+console.log(token)
 //log
 const logoutButton = document.getElementById("loginButton");
 if (token !== null) {
@@ -220,33 +225,37 @@ inputFile.addEventListener("change", () => {
     };
     reader.readAsDataURL(file);
     
-    // POST pour l'ajout
-    
-       {
-        const imageUrl = URL.createObjectURL(file);
-        console.log(file)
-        const title = document.getElementById('title-add-form').value;
-        const categoryId = document.getElementById('category-add-select').value;
-
-        let formData = new FormData();
-        formData.append("image", previewImg);
-        formData.append("title", title);
-        formData.append("category", categoryId);
-        fetch("http://localhost:5678/api/works", {
-          method: "POST",
-          body: formData,
-          headers: 
-          {
-            'Authorization': 'Bearer' +token,  
-          }
-        })
-        .then(function (response) {
-          console.log('Response:', response);
-          if (response.ok) {
-            addNewWork(title, imageUrl, categoryId);
-            
-          } 
-        })
-      }
-    }
+  }
+  
+  
 })
+// POST pour l'ajout du projet
+  const addWorkButton = document.querySelector("#addWorkButton");
+  addWorkButton.addEventListener("click", function () {
+    const formData = new FormData();
+    // recupération title ,category, img
+    const titre = document.querySelector("#titre").value;
+    const categorie = document.querySelector("#selectCategories").value;
+    const fileField = document.querySelector('input[type="file"]');
+    //si vide = message error
+    if (fileField.files[0] == undefined) {
+      const alert = document.getElementById('message_alert');
+      alert.innerHTML = "Image obligatoire";
+      alert.style.display = "block";
+      setTimeout(function () { alert.style.display = "none";} , 2000);
+      return false;
+    }
+    formData.append('title', titre);
+    formData.append('category', categorie);
+    formData.append('image', fileField.files[0]);
+    // API
+    const response =  fetch ("http://localhost:5678/api/works", {
+      method: "POST",
+      body: formData,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
+      })
+    });
+    
+      
