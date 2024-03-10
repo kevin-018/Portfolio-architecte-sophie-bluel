@@ -1,6 +1,8 @@
 // Recupération et stockage des travaux
 let works = [];
 
+
+
 const token = localStorage.getItem("token");
 // Récuperer les données via l'API
 async function fetchData() {
@@ -253,9 +255,10 @@ inputFile.addEventListener("change", () => {
       method: "POST",
       body: formData,
       headers: {
-        'Authorization': `Bearer ${token}`,
-      }
-      })
-    });
-    
-      
+        'Authorization': `Bearer ${token}`, 
+      },
+    }).then(() => {
+      window.alert("Photo ajoutée a la galerie")
+      return fetchData(); 
+    })    
+}); 
