@@ -31,23 +31,17 @@ async function userLog() {
 
     const loginPage = document.querySelector(".log");
     if (reponse.status === 200) {
-      alert("connecté");
       window.location.href = "index.html";
       loginPage.innerHTML = "";
       loginPage.innerHTML = "connecté";
     } else {
       // information error
       const errorLog = document.querySelector("error_log")
-      console.log("error_log");
-      passwordLog.innerHTML = "";
-      loginPage.innerHTML = "";
-      
-      
-      // information error
       
       }
     });
 }
+
 
 const valueToken = window.localStorage.getItem("token");
 console.log(valueToken);

@@ -1,8 +1,6 @@
 // Recupération et stockage des travaux
 let works = [];
 
-
-
 const token = localStorage.getItem("token");
 // Récuperer les données via l'API
 async function fetchData() {
@@ -31,11 +29,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const erreurText = document.createElement("p");
   erreurText.classList.add("error-message");
 });
-
 //--------------------- catégories
-
 //tableau catégories
-
 async function getCategories() {
   const categoriesUrl = "http://localhost:5678/api/categories";
 
@@ -78,7 +73,6 @@ function createCategories(categories) {
     buttonCategories.setAttribute("data-category-id", buttonC.id);
     categoriesGallery.appendChild(buttonCategories);
   }
-
   const divD = document.createElement("div");
 
   const gallery = document.querySelector(".gallery");
@@ -86,9 +80,7 @@ function createCategories(categories) {
 
   divD.appendChild(categoriesGallery);
   pGallery.insertBefore(divD, gallery);
-
   // filtrer au clics sur les boutons
-
   const boutonsF = document.querySelectorAll(".filter-button");
 
   boutonsF.forEach((bouton) => {
@@ -108,18 +100,14 @@ function createCategories(categories) {
   });
   buttonCategoriesTous.click();
 }
-
 // filtre sur les travaux
-
 function filterByCategorie(categorieId) {
   const travauxF = works.filter((travail) => {
     return categorieId === 0 || travail.categoryId === categorieId;
   });
-
   console.log(travauxF);
   createWorks(travauxF);
 }
-
 // tableau works
 function createWorks(filteredWorks) {
   const gallery = document.querySelector(".gallery");
@@ -159,13 +147,12 @@ function createWorks(filteredWorks) {
     imgGallery.src = travail.imageUrl;
     divModal.classList.add("divModal");
     trashIcon.classList.add("fa-solid", "fa-trash-can");
+
     imgModal.src = travail.imageUrl;
     trashIcon.id = travail.id;
-
     trashIcon.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
-
       fetch(`http://localhost:5678/api/works/${travail.id}`, {
         method: "DELETE",
         headers: {
@@ -173,23 +160,21 @@ function createWorks(filteredWorks) {
           Authorization: `Bearer ${token}`,
         },
       }).then(() => {
-        window.alert("Photo supprimée");
         return fetchData();
       });
     });
   });
 }
-
-function getAuthorization(){
-  const token = JSON.parse(localStorage.getItem('auth')).token;
-  return 'Bearer' + token;
+function getAuthorization() {
+  const token = JSON.parse(localStorage.getItem("auth")).token;
+  return "Bearer" + token;
 }
-console.log(token)
+console.log(token);
 //log
 const logoutButton = document.getElementById("loginButton");
 if (token !== null) {
   const login = document.querySelector("#loginButton");
-  document.querySelector(".flex-align button").style.display = "block";
+  document.querySelector("p.align-p").style.display = "flex";
   document.querySelector(".mode-edition").style.display = "block";
   login.innerText = "Logout";
   logoutButton.addEventListener("click", () => {
@@ -197,22 +182,19 @@ if (token !== null) {
     window.location.reload();
   });
 }
-const flexAlign = document.querySelector(".flex-align");
+const flexAlign = document.querySelector("align-p");
 if (token) {
   flexAlign.classList.add("extra-space");
 } else {
   flexAlign.classList.remove("extra-space");
 }
-
 //preview image
 const previewImg = document.querySelector(".containerFile img");
 const inputFile = document.querySelector(".containerFile input");
 const labelFile = document.querySelector(".containerFile label");
 const iconFile = document.querySelector(".containerFile .fa-image");
 const pFile = document.querySelector(".containerFile p");
-
 // ecoute changement input
-
 inputFile.addEventListener("change", () => {
   const file = inputFile.files[0];
   console.log(file);
@@ -226,39 +208,43 @@ inputFile.addEventListener("change", () => {
       pFile.style.display = "none";
     };
     reader.readAsDataURL(file);
-    
   }
-  
-  
-})
+});
 // POST pour l'ajout du projet
-  const addWorkButton = document.querySelector("#addWorkButton");
-  addWorkButton.addEventListener("click", function () {
-    const formData = new FormData();
-    // recupération title ,category, img
-    const titre = document.querySelector("#titre").value;
-    const categorie = document.querySelector("#selectCategories").value;
-    const fileField = document.querySelector('input[type="file"]');
-    //si vide = message error
-    if (fileField.files[0] == undefined) {
-      const alert = document.getElementById('message_alert');
-      alert.innerHTML = "Image obligatoire";
-      alert.style.display = "block";
-      setTimeout(function () { alert.style.display = "none";} , 2000);
-      return false;
-    }
-    formData.append('title', titre);
-    formData.append('category', categorie);
-    formData.append('image', fileField.files[0]);
-    // API
-    const response =  fetch ("http://localhost:5678/api/works", {
-      method: "POST",
-      body: formData,
-      headers: {
-        'Authorization': `Bearer ${token}`, 
-      },
-    }).then(() => {
-      window.alert("Photo ajoutée a la galerie")
-      return fetchData(); 
-    })    
-}); 
+const addWorkButton = document.querySelector("#addWorkButton");
+addWorkButton.addEventListener("click", function () {
+  const formData = new FormData();
+  // recupération title ,category, img
+  const titre = document.querySelector("#titre").value;
+  const categorie = document.querySelector("#selectCategories").value;
+  const fileField = document.querySelector('input[type="file"]');
+  //si vide = message error
+  if (fileField.files[0] == undefined) {
+    alert("Veuillez choisir une image");
+    return;
+  }
+  if (titre == "") {
+    alert("Veuillez définir un titre");
+    return;
+  }
+  console.log(categorie);
+  if (categorie == "") {
+    alert("Veuillez selectionner une catégorie");
+    return;
+  }
+  formData.append("title", titre);
+  formData.append("category", categorie);
+  formData.append("image", fileField.files[0]);
+  // verification des avant envoie
+
+  // API
+  const response = fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(() => {
+    return fetchData();
+  });
+});

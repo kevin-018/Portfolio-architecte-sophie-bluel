@@ -232,7 +232,6 @@ input[type="submit"]{
 }
 
  span#error_log{
-	color:red;
 	font-weight: bold;
 	text-align: center;
 	margin-top: 20px;

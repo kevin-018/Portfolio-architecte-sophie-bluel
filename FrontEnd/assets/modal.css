@@ -10,18 +10,13 @@
   display: none;
 }
 
-.mode-edition svg {
-  width: 20px;
-  height: 16px;
-  margin-bottom: -3px;
-}
-
 .mode-edition button {
   margin-top: 10px;
-  background-color: black;
+  color: white;
   border: none;
+  background-color: black;
 }
-.mode-edition button :hover {
+.mode-edition button:hover {
   cursor: pointer;
 }
 
@@ -36,20 +31,21 @@
   color: black;
   border: none;
   margin-bottom: 2%;
-  display: none;
 }
 
 .align-p {
-  margin-left: 30px;
+  display: none;
   margin-bottom: 2%;
+  margin-left: 2%;
+  font-size: 14px;
 }
-.align-p :hover {
+button#button-open-modal:hover {
   cursor: pointer;
 }
 
-.align-p svg {
+button#button-open-modal{
   height: 18px;
-  margin-bottom: -1%;
+  margin-left: 2%;
 }
 
 .overlay {
@@ -218,14 +214,13 @@
 .modal-footer {
   display: flex;
   justify-content: center;
-
   text-align: center;
 }
 
 button#addWorkButton.validButton {
   position: absolute;
   bottom: 30px;
-  right: 200px;
+  right: 150px;
   font-size: 14px;
   font-family: "Work Sans";
   font-weight: 500;
@@ -235,8 +230,11 @@ button#addWorkButton.validButton {
   color: white;
   cursor: pointer;
   border-radius: 20px;
+  width: 40%;
 }
-
+button#addWorkButton.validButton:active {
+  background-color: green;
+}
 .containerFile {
   display: flex;
   flex-direction: column;
@@ -256,7 +254,6 @@ button#addWorkButton.validButton {
 .containerFile label {
   justify-content: center;
   border: none;
-  color: #306685;
   padding-top: 9px;
   padding-bottom: 9px;
   padding-left: 35px;

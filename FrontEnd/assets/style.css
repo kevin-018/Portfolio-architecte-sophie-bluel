@@ -293,15 +293,15 @@ li:hover {
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"] {
-  font-family: "Syne";
-  font-weight: 700;
+button.modal-footer-button {
   color: white;
   background-color: #1d6154;
-  margin: 2em auto;
   width: 180px;
-  text-align: center;
   border-radius: 60px;
+  margin-top: 15%;
+  border-block-width: 10px;
+  border-color: #1d61;
+  border-block-color: #1d61;
 }
 
 footer nav ul {
