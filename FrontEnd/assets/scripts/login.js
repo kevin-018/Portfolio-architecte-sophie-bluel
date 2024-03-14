@@ -38,8 +38,6 @@ async function userLog() {
       }
     });
 }
-
-
 const valueToken = window.localStorage.getItem("token");
 console.log(valueToken);
 if (valueToken === null) {

@@ -182,12 +182,6 @@ if (token !== null) {
     window.location.reload();
   });
 }
-const flexAlign = document.querySelector("align-p");
-if (token) {
-  flexAlign.classList.add("extra-space");
-} else {
-  flexAlign.classList.remove("extra-space");
-}
 //preview image
 const previewImg = document.querySelector(".containerFile img");
 const inputFile = document.querySelector(".containerFile input");
@@ -236,8 +230,14 @@ addWorkButton.addEventListener("click", function () {
   formData.append("category", categorie);
   formData.append("image", fileField.files[0]);
   // verification des avant envoie
-
+  
   // API
+  const flexAlign = document.querySelector("align-p");
+  if (token) {
+    flexAlign.classList.add("extra-space");
+  } else {
+    flexAlign.classList.remove("extra-space");
+  }
   const response = fetch("http://localhost:5678/api/works", {
     method: "POST",
     body: formData,

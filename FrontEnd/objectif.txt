@@ -1,2 +1,0 @@
-faire apparaitre l'image quand selectionner 
-faire la fonction qui permet de supprimer une images ou la faire reapparaitre  
