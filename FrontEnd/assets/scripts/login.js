@@ -9,9 +9,6 @@ async function userLog() {
     const passwordLog = document.getElementById("password");
     const password = passwordLog.value;
     console.log(password);
-    const errorLog = document.getElementById("error_log");
-    errorLog.innerText ="Email ou Mot de passe incorrecte !";
-    errorLog.style.color = "red";
 
     const iDLogin = { email: email, password: password };
     const chargeUtile = JSON.stringify(iDLogin);
@@ -35,9 +32,9 @@ async function userLog() {
       loginPage.innerHTML = "";
       loginPage.innerHTML = "connecté";
     } else {
-      // information error
-      const errorLog = document.querySelector("error_log")
-      
+      const errorLog = document.getElementById("error_log");
+      errorLog.innerText ="Email ou Mot de passe incorrecte !";
+      errorLog.style.color = "red";
       }
     });
 }
