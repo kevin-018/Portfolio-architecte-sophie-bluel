@@ -192,14 +192,15 @@ button#button-open-modal{
   position: absolute;
   top: 15px;
   right: 8px;
-  cursor: pointer;
-  transition: 0.3s all ease-in-out;
+  transition: 0.2s all ease-in;
 }
 
 .modal-close button {
+  cursor: pointer;
   background-color: transparent;
   color: black;
   border: none;
+  font-size: 20px;
 }
 
 .modal-close svg {
@@ -208,7 +209,7 @@ button#button-open-modal{
 }
 
 .modal-close:hover {
-  transform: rotate(360deg);
+  transform: rotate(180deg);
 }
 
 .modal-footer {
