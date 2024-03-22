@@ -227,14 +227,10 @@ button#addWorkButton.validButton {
   font-weight: 500;
   padding: 10px 35px;
   border: none;
-  background-color: grey;
   color: white;
   cursor: pointer;
   border-radius: 20px;
   width: 40%;
-}
-button#addWorkButton.validButton:active {
-  background-color: green;
 }
 .containerFile {
   display: flex;

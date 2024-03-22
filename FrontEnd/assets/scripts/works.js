@@ -1,11 +1,12 @@
+const URL = "http://localhost:5678/api/";
+const worksUrl = `${URL}works`;
+const categoriesUrl = `${URL}categories`;
 // Recupération et stockage des travaux
 let works = [];
 
 const token = localStorage.getItem("token");
 // Récuperer les données via l'API
 async function fetchData() {
-  const worksUrl = "http://localhost:5678/api/works";
-
   try {
     const response = await fetch(worksUrl);
 
@@ -32,8 +33,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 //--------------------- catégories
 //tableau catégories
 async function getCategories() {
-  const categoriesUrl = "http://localhost:5678/api/categories";
-
   try {
     const response = await fetch(categoriesUrl);
 
@@ -205,40 +204,68 @@ inputFile.addEventListener("change", () => {
   }
 });
 // POST pour l'ajout du projet
-const addWorkButton = document.querySelector("#addWorkButton");
-addWorkButton.addEventListener("click", function () {
+//addWorkButton.addEventListener("click", function () {
+const addWork = function () {
+  //let token = sessionStorage.getItem("token");
   const formData = new FormData();
   // recupération title ,category, img
   const titre = document.querySelector("#titre").value;
   const categorie = document.querySelector("#selectCategories").value;
   const fileField = document.querySelector('input[type="file"]');
-  //si vide = message error
-  if (fileField.files[0] == undefined) {
-    alert("Veuillez choisir une image");
-    return;
-  }
-  if (titre == "") {
-    alert("Veuillez définir un titre");
-    return;
-  }
-  console.log(categorie);
-  if (categorie == "") {
-    alert("Veuillez selectionner une catégorie");
-    return;
-  }
+  
   formData.append("title", titre);
   formData.append("category", categorie);
   formData.append("image", fileField.files[0]);
-  
-  
-  
-  const response = fetch("http://localhost:5678/api/works", {
+
+  fetch(worksUrl, {
     method: "POST",
-    body: formData,
     headers: {
-      Authorization: `Bearer ${token}`,
+      'Authorization': `Bearer ${token}`,
     },
-  }).then(() => {
-    return fetchData();
+    body: formData,
+  }).then((response) => {
+    if (response.status === 200 || response.status === 201) {
+      resetForm();
+      veriForm();
+      resetPreview();
+      fetchData();
+    } else if (response.status === 401) {
+      console.log("sesion expiré");
+    } else {
+      console.log("Erreur");
+      
+    }
   });
-});
+};
+// remise a 0 du form
+function resetForm(){
+  selectCategories.value = 0;
+  titre.value = "";
+}
+function resetPreview() {
+  inputFile.value = "";
+  previewImg.src = "";
+  previewImg.style.display = "none";
+  labelFile.style.display = "flex";
+  iconFile.style.display = "flex";
+  pFile.style.display = "flex";
+
+}
+// verifié le formulaire
+const veriForm = function () {
+  if (
+    inputFile.value != "" &&
+    selectCategories.value != 0 &&
+    titre.value != ""
+  ) {
+    addWorkButton.style.backgroundColor = "#1D6154";
+    addWorkButton.addEventListener("click", addWork);
+  } else {
+    addWorkButton.style.backgroundColor = "#A7A7A7";
+    addWorkButton.removeEventListener("click", addWork);
+  }
+};
+inputFile.addEventListener("change", veriForm);
+selectCategories.addEventListener("change", veriForm);
+titre.addEventListener("change", veriForm);
+console.log(file.value);
