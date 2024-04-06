@@ -1,7 +1,8 @@
 const URL = "http://localhost:5678/api/";
-const worksUrl = `${URL}works`;
-const categoriesUrl = `${URL}categories`;
-// Recupération et stockage des travaux
+
+const worksUrl = `${URL}works/`;
+const categoriesUrl = `${URL}categories/`;
+// Affichage du tableau works
 let works = [];
 
 const token = localStorage.getItem("token");
@@ -16,11 +17,69 @@ async function fetchData() {
 
     works = await response.json();
 
-    // le tableau des travaux
+    // recharge 
     createWorks(works);
   } catch (error) {
     console.error("Fetch error:", error);
   }
+}
+
+// tableau works
+function createWorks(filtreWorks) {
+  const gallerie = document.querySelector(".gallery");
+  const modal = document.querySelector(".modal");
+  gallerie.innerHTML = "";
+  const modalBody = document.querySelector(".modal-body");
+  modalBody.innerHTML = "";
+  Array.from(modal.children).forEach((child) => {
+    if (
+      !child.classList.contains("modal-close") &&
+      !child.classList.contains("modal-header")
+    ) {
+      child.remove();
+    }
+  });
+  const modalForm = document.createElement("div");
+  modalForm.classList.add("modalForm");
+  filtreWorks.forEach((travail) => {
+    // const priority
+    const imgGallery = document.createElement("img");
+    const trashIcon = document.createElement("i");
+    const divModal = document.createElement("div");
+    const imgModal = document.createElement("img");
+    const ContainerGallery = document.createElement("Gallery");
+    const figCaptionGallery = document.createElement("figcaption");
+    const span = document.createElement("span");
+    // appendChild
+    gallerie.appendChild(ContainerGallery);
+    ContainerGallery.appendChild(imgGallery);
+    divModal.appendChild(span);
+    modalBody.appendChild(divModal);
+    divModal.appendChild(imgModal);
+    span.appendChild(trashIcon);
+    ContainerGallery.appendChild(figCaptionGallery);
+
+    figCaptionGallery.innerText = travail.title;
+    imgGallery.src = travail.imageUrl;
+    divModal.classList.add("divModal");
+    trashIcon.classList.add("fa-solid", "fa-trash-can");
+
+    imgModal.src = travail.imageUrl;
+    trashIcon.id = travail.id;
+    trashIcon.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      fetch(`${worksUrl}${travail.id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(() => {
+        return fetchData();
+      });
+    });
+  });
 }
 
 //execute la fonction fetchdata apres le DOM
@@ -46,6 +105,44 @@ async function getCategories() {
     console.error("Fetch error:", error);
   }
 }
+// filtre sur les travaux
+function filtreCategorie(categorieId) {
+  const travauxF = works.filter((travail) => {
+    return categorieId === 0 || travail.categoryId === categorieId;
+  });
+  console.log(travauxF);
+  createWorks(travauxF);
+}
+const addWork = function () {
+  
+  const formData = new FormData();
+  const titre = document.querySelector("#titre").value;
+  const categorie = document.querySelector("#selectCategories").value;
+  const fileField = document.querySelector('input[type="file"]');
+
+  formData.append("title", titre);
+  formData.append("category", categorie);
+  formData.append("image", fileField.files[0]);
+
+  fetch(worksUrl, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  }).then((response) => {
+    if (response.status === 200 || response.status === 201) {
+      resetForm();
+      veriForm();
+      resetPreview();
+      fetchData();
+    } else if (response.status === 401) {
+      console.log("sesion expiré");
+    } else {
+      console.log("Erreur");
+    }
+  });
+};
 // créations boutons filtres
 function createCategories(categories) {
   const categoriesGallery = document.createElement("div");
@@ -84,12 +181,12 @@ function createCategories(categories) {
 
   boutonsF.forEach((bouton) => {
     bouton.addEventListener("click", () => {
-      const categorieFilterId = parseInt(
+      const categorieId = parseInt(
         bouton.getAttribute("data-category-id"),
         10
       );
 
-      filterByCategorie(categorieFilterId);
+      filtreCategorie(categorieId);
 
       boutonsF.forEach((btn) => {
         btn.classList.remove("active");
@@ -99,77 +196,14 @@ function createCategories(categories) {
   });
   buttonCategoriesTous.click();
 }
-// filtre sur les travaux
-function filterByCategorie(categorieId) {
-  const travauxF = works.filter((travail) => {
-    return categorieId === 0 || travail.categoryId === categorieId;
-  });
-  console.log(travauxF);
-  createWorks(travauxF);
-}
-// tableau works
-function createWorks(filteredWorks) {
-  const gallery = document.querySelector(".gallery");
-  const modal = document.querySelector(".modal");
-  gallery.innerHTML = "";
-  const modalBody = document.querySelector(".modal-body");
-  modalBody.innerHTML = "";
-  Array.from(modal.children).forEach((child) => {
-    if (
-      !child.classList.contains("modal-close") &&
-      !child.classList.contains("modal-header")
-    ) {
-      child.remove();
-    }
-  });
-  const modalForm = document.createElement("div");
-  modalForm.classList.add("modalForm");
-  filteredWorks.forEach((travail) => {
-    // const priority
-    const imgGallery = document.createElement("img");
-    const trashIcon = document.createElement("i");
-    const divModal = document.createElement("div");
-    const imgModal = document.createElement("img");
-    const figureGallery = document.createElement("figure");
-    const figCaptionGallery = document.createElement("figcaption");
-    const span = document.createElement("span");
-    // appendChild
-    gallery.appendChild(figureGallery);
-    figureGallery.appendChild(imgGallery);
-    divModal.appendChild(span);
-    modalBody.appendChild(divModal);
-    divModal.appendChild(imgModal);
-    span.appendChild(trashIcon);
-    figureGallery.appendChild(figCaptionGallery);
 
-    figCaptionGallery.innerText = travail.title;
-    imgGallery.src = travail.imageUrl;
-    divModal.classList.add("divModal");
-    trashIcon.classList.add("fa-solid", "fa-trash-can");
 
-    imgModal.src = travail.imageUrl;
-    trashIcon.id = travail.id;
-    trashIcon.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      fetch(`http://localhost:5678/api/works/${travail.id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }).then(() => {
-        return fetchData();
-      });
-    });
-  });
-}
 function getAuthorization() {
   const token = JSON.parse(localStorage.getItem("auth")).token;
   return "Bearer" + token;
 }
 console.log(token);
-//log
+// deconnect
 const logoutButton = document.getElementById("loginButton");
 if (token !== null) {
   const login = document.querySelector("#loginButton");
@@ -204,41 +238,10 @@ inputFile.addEventListener("change", () => {
   }
 });
 // POST pour l'ajout du projet
-//addWorkButton.addEventListener("click", function () {
-const addWork = function () {
-  //let token = sessionStorage.getItem("token");
-  const formData = new FormData();
-  // recupération title ,category, img
-  const titre = document.querySelector("#titre").value;
-  const categorie = document.querySelector("#selectCategories").value;
-  const fileField = document.querySelector('input[type="file"]');
-  
-  formData.append("title", titre);
-  formData.append("category", categorie);
-  formData.append("image", fileField.files[0]);
 
-  fetch(worksUrl, {
-    method: "POST",
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
-    body: formData,
-  }).then((response) => {
-    if (response.status === 200 || response.status === 201) {
-      resetForm();
-      veriForm();
-      resetPreview();
-      fetchData();
-    } else if (response.status === 401) {
-      console.log("sesion expiré");
-    } else {
-      console.log("Erreur");
-      
-    }
-  });
-};
+
 // remise a 0 du form
-function resetForm(){
+function resetForm() {
   selectCategories.value = 0;
   titre.value = "";
 }
@@ -249,7 +252,6 @@ function resetPreview() {
   labelFile.style.display = "flex";
   iconFile.style.display = "flex";
   pFile.style.display = "flex";
-
 }
 // verifié le formulaire
 const veriForm = function () {
@@ -265,6 +267,7 @@ const veriForm = function () {
     addWorkButton.removeEventListener("click", addWork);
   }
 };
+//verification du change
 inputFile.addEventListener("change", veriForm);
 selectCategories.addEventListener("change", veriForm);
 titre.addEventListener("change", veriForm);
